@@ -1,0 +1,249 @@
+﻿<Window x:Class="SneakersShopApp.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SneakersShopApp"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="CanMinimize"
+        Icon="/Resources/iconsneaker.ico">
+    
+    <Window.Resources>
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF5733"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="15,10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="8" 
+                            Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E64A2E"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="InputBorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsFocused, ElementName=LoginTextBox}" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF5733"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsFocused, ElementName=PasswordBox}" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF5733"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="8" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                     Margin="{TemplateBinding Padding}"
+                                     VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF5733"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="RoundedPasswordBoxStyle" TargetType="PasswordBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="8" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                     Margin="{TemplateBinding Padding}"
+                                     VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF5733"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="LinkTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FF5733"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="TextDecorations" Value="Underline"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Левая секция с изображением -->
+        <Border Grid.Column="0" Background="#F8F8F8" CornerRadius="0,0,0,0">
+            <Grid Margin="30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Логотип -->
+                <StackPanel Grid.Row="0" HorizontalAlignment="Left">
+                    <Canvas Width="200" Height="60">
+                        <Image Source="/Resources/sneakers.png" Width="100" Height="100" Canvas.Left="5" Canvas.Top="-8"/>
+                        <TextBlock Canvas.Left="105" Canvas.Top="23" Text="Sneakers Shop" FontWeight="Bold" FontSize="22" Foreground="#333333"/>
+                    </Canvas>
+                </StackPanel>
+
+                <!-- Изображение -->
+                <Border Grid.Row="1" Margin="0,20">
+                    <Image Source="/Resources/sneakers.jpg" Stretch="Uniform"/>
+                    <!-- Примечание: Нужно добавить изображение спортивных кроссовок в проект -->
+                </Border>
+
+                <!-- Текст под изображением -->
+                <TextBlock Grid.Row="2" 
+                       Text="Мы предлагаем лучшие спортивные кроссовки для вашего комфорта и производительности" 
+                       TextWrapping="Wrap"
+                       TextAlignment="Center" 
+                       Foreground="#777777"
+                       FontSize="14"
+                       LineHeight="20"/>
+            </Grid>
+        </Border>
+
+        <!-- Правая секция с формой -->
+        <Border Grid.Column="1" Background="White" Padding="40">
+            <Grid VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Заголовок -->
+                <TextBlock Grid.Row="0" 
+                       Text="Добро пожаловать!" 
+                       FontSize="28" 
+                       FontWeight="SemiBold" 
+                       Foreground="#333333"
+                       Margin="0,0,0,8"/>
+
+                <TextBlock Grid.Row="1" 
+                       Text="Войдите в свой аккаунт" 
+                       FontSize="16" 
+                       Foreground="#777777" 
+                       Margin="0,0,0,36"/>
+
+                <!-- Форма входа -->
+                <StackPanel Grid.Row="2" Margin="0,0,0,10">
+                    <TextBlock Text="Логин" 
+                           FontSize="14" 
+                           Foreground="#555555" 
+                           Margin="0,0,0,8"/>
+                    <!--<TextBox x:Name="EmailTextBox" 
+                         Style="{StaticResource RoundedTextBoxStyle}"
+                         Foreground="Black"
+                         Height="46"/> -->
+                    <Border CornerRadius="8" Style="{StaticResource InputBorderStyle}" Padding="0">
+                        <TextBox x:Name="LoginTextBox"
+                         Background="Transparent"
+                         Foreground="Black"
+                         FontSize="14"
+                         Padding="14,0"
+                         BorderThickness="0"
+                         VerticalContentAlignment="Center"
+                         Height="46"
+                         Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+                    <TextBlock Text="Пароль" 
+                           FontSize="14" 
+                           Foreground="#555555" 
+                           Margin="0,0,0,8"/>
+                    <Border CornerRadius="8" Style="{StaticResource InputBorderStyle}" Padding="0">
+                        <PasswordBox x:Name="PasswordBox"
+                                     Background="Transparent"
+                                     Foreground="Black"
+                                     FontSize="14"
+                                     Padding="14,0"
+                                     BorderThickness="0"
+                                     VerticalContentAlignment="Center"
+                                     Height="46"/>
+                    </Border>
+                </StackPanel>
+
+                <!-- Забыли пароль -->
+                <TextBlock Grid.Row="4" 
+                       HorizontalAlignment="Right" 
+                       Margin="0,10,0,24">
+                <Hyperlink TextDecorations="{x:Null}" Foreground="#777777" Click="ForgetPassword_Click">
+                    <TextBlock Text="Забыли пароль?"/>
+                </Hyperlink>
+            </TextBlock>
+
+                <!-- Кнопка входа -->
+                <Button Grid.Row="5" 
+                    Content="Войти" 
+                    Style="{StaticResource RoundedButtonStyle}"
+                    Height="46"
+                    Command="{Binding LoginCommand}"
+                    CommandParameter="{Binding ElementName=PasswordBox}"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
